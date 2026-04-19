@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Test Output
-        run: echo "This is a test"
+        run: echo "This is a test."
 
   connect-remote:
     runs-on: ubuntu-latest
