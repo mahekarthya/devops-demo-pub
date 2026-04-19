@@ -1,0 +1,21 @@
+name: Deploy Postgres script
+run-name: Setting up new postgres database
+on: [push]
+jobs:
+  test-output:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Test Output
+      run: echo "Here is a test"
+  connect-remote:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+	 - name: Show databases
+      run: |
+        export PGPASSWORD='${{ secrets.DB_PASSWORD }}'
+        psql -h ${{ secrets.DB_HOSTNAME }} -p 5432 -U ${{ secrets.DB_USER }} -d postgres -c "SELECT datname FROM pg_database;"
+    - name: Run a sample SQL on remote postgres databaase
+      run: |
+        export PGPASSWORD='${{ secrets.DB_PASSWORD }}'
+        psql -h ${{ secrets.DB_HOSTNAME }} -p 5432 -U ${{ secrets.DB_USER }} -d ${{ secrets.DB_NAME }} -f Create_gisdb.sql
