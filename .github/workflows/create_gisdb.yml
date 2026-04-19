@@ -13,14 +13,25 @@ jobs:
   connect-remote:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout Code
+        uses: actions/checkout@v4
 
       - name: Show databases
         run: |
-          PGPASSWORD=${{ secrets.DB_PASSWORD }} \
-          psql -h ${{ secrets.DB_HOSTNAME }} -p 5432 -U ${{ secrets.DB_USER }} -d postgres -c "SELECT datname FROM pg_database;"
+          psql -h "${{ secrets.DB_HOSTNAME }}" \
+               -p 5432 \
+               -U "${{ secrets.DB_USER }}" \
+               -d postgres \
+               -c "SELECT datname FROM pg_database;"
+        env:
+          PGPASSWORD: ${{ secrets.DB_PASSWORD }}
 
       - name: Run SQL file
         run: |
-          PGPASSWORD=${{ secrets.DB_PASSWORD }} \
-          psql -h ${{ secrets.DB_HOSTNAME }} -p 5432 -U ${{ secrets.DB_USER }} -d ${{ secrets.DB_NAME }} -f Create_gisdb.sql
+          psql -h "${{ secrets.DB_HOSTNAME }}" \
+               -p 5432 \
+               -U "${{ secrets.DB_USER }}" \
+               -d "${{ secrets.DB_NAME }}" \
+               -f "Create_gisdb.sql"
+        env:
+          PGPASSWORD: ${{ secrets.DB_PASSWORD }}
