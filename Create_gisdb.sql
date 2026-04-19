@@ -1,6 +1,7 @@
+
 \conninfo
 
-\l
+select datname from pg_database;
 
 DROP DATABASE IF EXISTS gisdb;
 
@@ -23,4 +24,4 @@ INSERT INTO customer (id, custname) VALUES
 
 Select * from customer;
 
-\l
+select datname from pg_database;
