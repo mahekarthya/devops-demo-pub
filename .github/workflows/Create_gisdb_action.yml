@@ -5,20 +5,20 @@ on:
   push:
     branches:
       - main
+
   pull_request:
-    type:
-	  - opened
-      - synchronize	  
+    types:
+      - opened
+      - synchronize
     branches:
       - main
 
 jobs:
-  # --- DEVELOPMENT JOB ---
   deploy-dev:
     runs-on: ubuntu-latest
-    # Explicitly checks that the PR is targeting the main branch
     if: github.event_name == 'pull_request' && github.event.pull_request.base.ref == 'main'
     environment: Dev
+
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
@@ -33,12 +33,11 @@ jobs:
         env:
           PGPASSWORD: ${{ secrets.DB_PASSWORD }}
 
-  # --- TEST JOB ---
   deploy-test:
     runs-on: ubuntu-latest
-    # Explicitly checks that the final push/merge happened on main
     if: github.event_name == 'push' && github.ref_name == 'main'
     environment: Test
+
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
