@@ -29,6 +29,10 @@ INSERT INTO customer (id, custname) VALUES
 (5, 'IBM'),
 (5, 'ICICI');
 
+UPDATE customer 
+SET id = 6 
+WHERE custname = 'ICICI';
+
 \echo ==== Display customer data ====
 Select * from customer;
 
