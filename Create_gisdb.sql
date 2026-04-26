@@ -25,7 +25,8 @@ INSERT INTO customer (id, custname) VALUES
 (1, 'ABC Co'),
 (2, 'Honda Co'),
 (3, 'Yamaha'),
-(4, 'Hyundai');
+(4, 'Hyundai'),
+(5, 'IBM');
 
 \echo ==== Display customer data ====
 Select * from customer;
