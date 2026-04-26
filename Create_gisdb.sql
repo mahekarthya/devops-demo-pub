@@ -21,6 +21,8 @@ INSERT INTO customer (id, custname) VALUES
 (1, 'ABC Co'),
 (2, 'Honda Co'),
 (3, 'Yamaha');
+(4, 'Hyundai');
+
 
 Select * from customer;
 
